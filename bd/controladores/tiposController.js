@@ -1,37 +1,37 @@
 const { crearError } = require("../../servidor/errores");
 const Tipo = require("../modelos/Tipos");
 
-const listarTipos = () => {
+const listarTipos = async () => {
   try {
-    const listaTipos = Tipo.find();
+    const listaTipos = await Tipo.find();
     return listaTipos;
   } catch (err) {
-    throw crearError(`No se han podido listar los tipos: ${err.message}`);
+    throw crearError(`No se han podido listar los tipos${err.message}`);
   }
 };
 
-const mostrarTipo = (idTipo) => {
+const mostrarTipo = async (idTipo) => {
   try {
-    const tipoEncontrado = Tipo.findById(idTipo);
+    const tipoEncontrado = await Tipo.findById(idTipo);
     return tipoEncontrado;
   } catch (err) {
     throw crearError(`No se ha podido mostrar el tipo: ${err.message}`);
   }
 };
 
-const crearTipo = (nuevoTipo) => {
+const crearTipo = async (nuevoTipo) => {
   try {
-    const tipoCreado = Tipo.create(nuevoTipo);
+    const tipoCreado = await Tipo.create(nuevoTipo);
     return tipoCreado;
   } catch (err) {
     throw crearError(`No se ha podido crear el tipo: ${err.message}`);
   }
 };
 
-const modificarTipo = (tipoModificado) => {
+const modificarTipo = async (idTipo, tipoModificado) => {
   try {
-    const tipoModificadoDevuelto = Tipo.findByIdAndUpdate(
-      tipoModificado._id,
+    const tipoModificadoDevuelto = await Tipo.findByIdAndUpdate(
+      idTipo,
       tipoModificado
     );
     return tipoModificadoDevuelto;
@@ -40,9 +40,9 @@ const modificarTipo = (tipoModificado) => {
   }
 };
 
-const borrarTipo = (idTipo) => {
+const borrarTipo = async (idTipo) => {
   try {
-    const tipoBorrado = Tipo.findByIdAndRemove(idTipo);
+    const tipoBorrado = await Tipo.findByIdAndRemove(idTipo);
     return tipoBorrado;
   } catch (err) {
     throw crearError(`No se ha podido borrar el tipo: ${err.message}`);
