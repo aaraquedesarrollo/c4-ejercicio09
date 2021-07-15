@@ -6,7 +6,7 @@ const { errorServidor } = require("./errores");
 
 const app = express();
 
-const puerto = process.env.MI_PORT || 4000;
+const puerto = process.env.PORT || process.env.MI_PORT || 4000;
 
 const server = app.listen(puerto, () => {
   debug(
